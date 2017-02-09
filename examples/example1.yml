@@ -1,0 +1,17 @@
+---
+  - hosts: lab
+    gather_facts: yes
+    remote_user: user
+    become: yes
+    become_method: sudo
+    roles:
+      - role: nfs
+        nfsserver: nfsserver1.example.com
+        ShareState: mounted
+        manage: true
+        permissions: false
+        nfs:
+          - { server: "{{ nfsserver }}", mntpoint: /NFSshare/RMAN/share01, resource: "/srv/NFSshare/testshare01", opts: "{{ nfsopts_rman }}" }
+          - { server: "{{ nfsserver }}", mntpoint: /NFSshare/RMAN/share02, resource: "/srv/NFSshare/testshare02", opts: "{{ nfsopts_rman }}" }
+          - { server: "{{ nfsserver }}", mntpoint: /NFSshare/share02, resource: "/srv/NFSshare/testshare02", opts: "{{ nfsopts }}", user: user, group: group, mode: 775 }
+	  - { server: "{{ nfsserver }}", mntpoint: /NFSshare/share02, resource: "/srv/NFSshare/testshare02", opts: "{{ nfsopts }}", user: user, group: group, mode: 775 }

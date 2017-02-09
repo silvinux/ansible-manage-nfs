@@ -1,0 +1,9 @@
+---
+- name: Configure NFS share
+  mount: name="{{ item.mntpoint }}" src="{{ item.server }}:{{ item.resource }}" fstype=nfs opts="{{ item.opts }}" state="{{ ShareState }}"
+  with_items: "{{ nfs | default([]) }}"
+
+- name: NFS directory permissions
+  file: path="{{ item.mntpoint }}" state=directory owner="{{ item.user| default(omit) }}" group="{{ item.group| default(omit) }}" mode="{{ item.mode| default(omit) }}"
+  with_items: "{{ nfs | default([]) }}"
+  when: permissions == true

@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: silvinux
+  description: NFS management (mount/umount)
+  company: N/A
+  license: GPLv3
+  min_ansible_version: 1.9
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - mount-NFS
+    - unmount-NFS
+dependencies: []
